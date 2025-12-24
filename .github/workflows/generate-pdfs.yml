@@ -20,14 +20,14 @@ jobs:
         uses: BaileyJM02/markdown-to-pdf@v1
         with:
           input_path: Flutter/FLUTTER.md
-          output_dir: Flutter
+          output_dir: Flutter/
           build_html: false
 
       - name: Generate iOS PDF
         uses: BaileyJM02/markdown-to-pdf@v1
         with:
           input_path: iOS/iOS.md
-          output_dir: iOS
+          output_dir: iOS/
           build_html: false
 
       - name: Commit PDFs
