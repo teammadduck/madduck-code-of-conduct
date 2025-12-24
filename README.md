@@ -4,5 +4,5 @@ Code review guidelines and development standards for mobile projects.
 
 ## Guidelines
 
-- [Flutter Code Review Guidelines](FLUTTER.md)
-- [iOS Development Guidelines](iOS.md)
+- [Flutter Code Review Guidelines](Flutter/FLUTTER.md)
+- [iOS Development Guidelines](iOS/iOS.md)
