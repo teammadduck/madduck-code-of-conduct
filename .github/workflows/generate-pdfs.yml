@@ -16,33 +16,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install pandoc and LaTeX
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended
+      - name: Generate Flutter PDF
+        uses: BaileyJM02/markdown-to-pdf@v1
+        with:
+          input_path: Flutter/FLUTTER.md
+          output_dir: Flutter
+          build_html: false
 
-      - name: Generate PDFs
-        run: |
-          pandoc Flutter/FLUTTER.md \
-            -o Flutter/FLUTTER.pdf \
-            --pdf-engine=xelatex \
-            -V geometry:margin=1in \
-            -V colorlinks=true \
-            -V linkcolor=blue \
-            -V urlcolor=blue
-
-          pandoc iOS/iOS.md \
-            -o iOS/iOS.pdf \
-            --pdf-engine=xelatex \
-            -V geometry:margin=1in \
-            -V colorlinks=true \
-            -V linkcolor=blue \
-            -V urlcolor=blue
+      - name: Generate iOS PDF
+        uses: BaileyJM02/markdown-to-pdf@v1
+        with:
+          input_path: iOS/iOS.md
+          output_dir: iOS
+          build_html: false
 
       - name: Commit PDFs
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add Flutter/FLUTTER.pdf iOS/iOS.pdf
+          git add Flutter/*.pdf iOS/*.pdf
           git diff --staged --quiet || git commit -m "chore: update generated PDFs"
           git push
