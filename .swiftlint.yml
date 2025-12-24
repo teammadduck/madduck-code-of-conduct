@@ -1,0 +1,342 @@
+# SwiftLint Configuration
+# Documentation: https://github.com/realm/SwiftLint
+# Run: swiftlint lint --config .swiftlint.yml
+
+# ============================================================================
+# DISABLED RULES
+# ============================================================================
+disabled_rules:
+  - trailing_whitespace
+  - identifier_name
+  - inclusive_language
+
+# ============================================================================
+# EXCLUDED PATHS
+# ============================================================================
+excluded:
+  - Pods
+  - KocAilemTests
+  - reports
+  - vendor
+  - .build
+  - fastlane
+  - Gemfile.locked
+  - Gemfile
+  - Build
+  - Carthage
+  - Frameworks/Sources/Frameworks/LockSmith
+  - Frameworks/Sources/Frameworks/PieCharts
+  - Frameworks/Sources/Frameworks/Karte
+  - Frameworks/Sources/Frameworks/ImageSlideShow
+  - SPM
+
+# ============================================================================
+# OPT-IN RULES
+# ============================================================================
+opt_in_rules:
+  - array_init
+  - closure_body_length
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - contains_over_range_nil_comparison
+  - discouraged_assert
+  - discouraged_object_literal
+  - empty_collection_literal
+  - empty_count
+  - empty_string
+  - enum_case_associated_values_count
+  - explicit_init
+  - fallthrough
+  - fatal_error_message
+  - first_where
+  - flatmap_over_map_reduce
+  - force_unwrapping
+  - function_default_parameter_at_end
+  - identical_operands
+  - implicitly_unwrapped_optional
+  - joined_default_parameter
+  - last_where
+  - legacy_multiple
+  - legacy_random
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - modifier_order
+  - multiline_arguments
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - multiline_parameters
+  - number_separator
+  - operator_usage_whitespace
+  - optional_enum_case_matching
+  - overridden_super_call
+  - override_in_extension
+  - pattern_matching_keywords
+  - prefer_self_type_over_type_of_self
+  - prefer_zero_over_explicit_init
+  - private_action
+  - private_outlet
+  - prohibited_super_call
+  - reduce_into
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - sorted_first_last
+  - sorted_imports
+  - static_operator
+  - strong_iboutlet
+  - toggle_bool
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  - unowned_variable_capture
+  - untyped_error_in_catch
+  - vertical_parameter_alignment_on_call
+  - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
+  - yoda_condition
+
+# ============================================================================
+# IDENTIFIER NAME RULES
+# ============================================================================
+identifier_name:
+  min_length:
+    warning: 2
+    error: 1
+  max_length:
+    warning: 50
+    error: 60
+  excluded:
+    - id
+    - ok
+    - to
+    - x
+    - y
+    - i
+    - j
+
+# ============================================================================
+# TYPE NAME RULES
+# ============================================================================
+type_name:
+  min_length: 3
+  max_length:
+    warning: 50
+    error: 60
+
+# ============================================================================
+# LINE LENGTH - 120 characters max
+# ============================================================================
+line_length:
+  warning: 120
+  error: 150
+  ignores_comments: true
+  ignores_urls: true
+  ignores_interpolated_strings: true
+
+# ============================================================================
+# FILE LENGTH - 400 lines max
+# Rationale: Large files are hard to navigate and usually violate SRP
+# ============================================================================
+file_length:
+  warning: 400
+  error: 500
+  ignore_comment_only_lines: true
+
+# ============================================================================
+# TYPE BODY LENGTH - Keep classes/structs focused
+# Rationale: Single Responsibility Principle - classes should do one thing
+# ============================================================================
+type_body_length:
+  warning: 300
+  error: 400
+
+# ============================================================================
+# FUNCTION BODY LENGTH - Keep functions small
+# Rationale: Single Responsibility - each function should do one thing
+# ============================================================================
+function_body_length:
+  warning: 30
+  error: 50
+
+# ============================================================================
+# CYCLOMATIC COMPLEXITY - Max 5
+# Rationale: Complex functions are hard to test and understand
+# If complexity > 5, break the function into smaller pieces
+# ============================================================================
+cyclomatic_complexity:
+  warning: 5
+  error: 10
+  ignores_case_statements: false
+
+# ============================================================================
+# FUNCTION PARAMETER COUNT
+# Rationale: Too many parameters = code smell, consider parameter object
+# ============================================================================
+function_parameter_count:
+  warning: 4
+  error: 6
+  ignores_default_parameters: true
+
+# ============================================================================
+# NESTING LEVEL - Avoid deep nesting
+# Rationale: Deep nesting makes code hard to read - use early returns
+# ============================================================================
+nesting:
+  type_level:
+    warning: 2
+    error: 3
+  function_level:
+    warning: 3
+    error: 4
+
+# ============================================================================
+# CLOSURE BODY LENGTH
+# Rationale: Long closures should be extracted to separate functions
+# ============================================================================
+closure_body_length:
+  warning: 25
+  error: 40
+
+# ============================================================================
+# ENUM CASE ASSOCIATED VALUES COUNT
+# Rationale: Too many associated values = consider a struct instead
+# ============================================================================
+enum_case_associated_values_count:
+  warning: 4
+  error: 6
+
+# ============================================================================
+# LARGE TUPLE
+# Rationale: Large tuples should be replaced with named types
+# ============================================================================
+large_tuple:
+  warning: 3
+  error: 4
+
+# ============================================================================
+# FORCE CAST - FORBIDDEN in production code
+# ============================================================================
+force_cast: error
+
+# ============================================================================
+# FORCE TRY - FORBIDDEN in production code
+# ============================================================================
+force_try: error
+
+# ============================================================================
+# FORCE UNWRAPPING - Discouraged
+# ============================================================================
+force_unwrapping:
+  severity: warning
+
+# ============================================================================
+# IMPLICITLY UNWRAPPED OPTIONAL
+# Only allowed for @IBOutlet
+# ============================================================================
+implicitly_unwrapped_optional:
+  severity: warning
+  mode: all_except_iboutlets
+
+# ============================================================================
+# TRAILING CLOSURE
+# ============================================================================
+trailing_closure:
+  only_single_muted_parameter: true
+
+# ============================================================================
+# VERTICAL WHITESPACE
+# ============================================================================
+vertical_whitespace:
+  max_empty_lines: 1
+
+# ============================================================================
+# SPACING RULES
+# ============================================================================
+comma: error
+
+colon:
+  severity: error
+  flexible_right_spacing: false
+  apply_to_dictionaries: true
+
+opening_brace:
+  severity: error
+
+statement_position:
+  severity: error
+  statement_mode: default
+
+return_arrow_whitespace: error
+
+# ============================================================================
+# CUSTOM RULES
+# ============================================================================
+custom_rules:
+  # Prevent print statements in production code
+  no_print_statements:
+    name: "No Print Statements"
+    regex: "\\bprint\\s*\\("
+    message: "Remove print statements. Use proper logging (os_log, Logger) instead."
+    severity: warning
+    match_kinds:
+      - identifier
+
+  # Prevent NSLog in production code
+  no_nslog_statements:
+    name: "No NSLog Statements"
+    regex: "\\bNSLog\\s*\\("
+    message: "Remove NSLog statements. Use proper logging (os_log, Logger) instead."
+    severity: warning
+    match_kinds:
+      - identifier
+
+  # Ensure MARK comments have proper spacing
+  mark_comment_spacing:
+    name: "MARK Comment Spacing"
+    regex: "// MARK:-"
+    message: "MARK comments should have a space after the colon: // MARK: -"
+    severity: warning
+
+  # Prevent hardcoded colors (use asset catalog)
+  no_hardcoded_colors:
+    name: "No Hardcoded Colors"
+    regex: "UIColor\\(red:|UIColor\\(hue:|#colorLiteral"
+    message: "Use color assets from Colors package instead of hardcoded colors."
+    severity: warning
+
+  # Prevent DispatchQueue.main.async in favor of @MainActor
+  prefer_main_actor:
+    name: "Prefer @MainActor"
+    regex: "DispatchQueue\\.main\\.async"
+    message: "Consider using @MainActor and async/await instead of DispatchQueue.main.async"
+    severity: warning
+
+  # Ensure TODO comments include author
+  todo_requires_author:
+    name: "TODO Requires Author"
+    regex: "//\\s*TODO:(?!\\s*\\[)"
+    message: "TODO comments should include author: // TODO: [AuthorName] Description"
+    severity: warning
+
+  # Ensure FIXME comments include author
+  fixme_requires_author:
+    name: "FIXME Requires Author"
+    regex: "//\\s*FIXME:(?!\\s*\\[)"
+    message: "FIXME comments should include author: // FIXME: [AuthorName] Description"
+    severity: warning
+
+  # Prevent empty catch blocks
+  no_empty_catch:
+    name: "No Empty Catch Blocks"
+    regex: "catch\\s*\\{\\s*\\}"
+    message: "Empty catch blocks hide errors. Handle or log the error."
+    severity: error
+
+  # Encourage final classes
+  prefer_final_class:
+    name: "Prefer Final Class"
+    regex: "^(?!.*final)\\s*class\\s+(?!.*:.*View|.*Controller|.*Cell)"
+    message: "Consider marking class as 'final' if it's not intended to be subclassed."
+    severity: warning

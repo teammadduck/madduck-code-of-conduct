@@ -1,0 +1,147 @@
+# SwiftFormat Configuration
+# Documentation: https://github.com/nicklockwood/SwiftFormat
+# Run: swiftformat . --config .swiftformat
+
+# ============================================================================
+# SWIFT VERSION
+# ============================================================================
+--swiftversion 5.9
+
+# ============================================================================
+# INDENTATION
+# ============================================================================
+--indent 4
+--tabwidth 4
+--smarttabs enabled
+--indentcase false
+--ifdef no-indent
+--indentstrings false
+
+# ============================================================================
+# LINE BREAKS & WRAPPING
+# ============================================================================
+--linebreaks lf
+--maxwidth 120
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--wrapreturntype preserve
+--wrapconditions after-first
+--wraptypealiases before-first
+--wrapternary before-operators
+--wrapenumcases always
+--wrapeffects preserve
+
+# ============================================================================
+# SPACING
+# ============================================================================
+--operatorfunc spaced
+--nospaceoperators
+--ranges spaced
+--trimwhitespace always
+--typeblanklines remove
+
+# ============================================================================
+# BRACES
+# ============================================================================
+--allman false
+--elseposition same-line
+--guardelse next-line
+
+# ============================================================================
+# SEMICOLONS
+# ============================================================================
+--semicolons never
+
+# ============================================================================
+# IMPORTS
+# ============================================================================
+--importgrouping testable-bottom
+--sortedimports true
+
+# ============================================================================
+# ATTRIBUTES
+# ============================================================================
+--funcattributes prev-line
+--typeattributes prev-line
+--varattributes same-line
+--storedvarattrs same-line
+--computedvarattrs same-line
+
+# ============================================================================
+# SELF
+# ============================================================================
+--self remove
+--selfrequired
+
+# ============================================================================
+# ARGUMENTS
+# ============================================================================
+--stripunusedargs closure-only
+
+# ============================================================================
+# HEADERS
+# ============================================================================
+--header ignore
+
+# ============================================================================
+# MARK COMMENTS
+# ============================================================================
+--marktypes never
+--markextensions always
+--extensionacl on-declarations
+--organizetypes class,struct,enum,extension
+
+# ============================================================================
+# TYPES
+# ============================================================================
+--redundanttype inferred
+--emptybraces no-space
+
+# ============================================================================
+# ACRONYMS
+# ============================================================================
+--acronyms ID,URL,UUID,API,HTTP,HTTPS,JSON,XML,HTML,UI,URI
+
+# ============================================================================
+# VOID
+# ============================================================================
+--voidtype void
+
+# ============================================================================
+# CLOSURES
+# ============================================================================
+--closurevoid remove
+--trailingclosures
+
+# ============================================================================
+# FILE EXCLUSIONS
+# ============================================================================
+--exclude Build,Pods,.build,Carthage,SPM,vendor,Frameworks/Sources/Frameworks/LockSmith,Frameworks/Sources/Frameworks/PieCharts,Frameworks/Sources/Frameworks/Karte,Frameworks/Sources/Frameworks/ImageSlideShow
+
+# ============================================================================
+# DISABLED RULES
+# Rules that conflict with project style or cause issues
+# ============================================================================
+--disable wrapMultilineStatementBraces
+--disable trailingCommas
+--disable andOperator
+--disable preferForLoop
+--disable blankLinesBetweenImports
+--disable blankLinesAtEndOfScope
+--disable blankLinesAtStartOfScope
+--disable sortSwitchCases
+
+# ============================================================================
+# ENABLED RULES
+# Explicitly enable beneficial rules
+# ============================================================================
+--enable isEmpty
+--enable wrapEnumCases
+--enable wrapSwitchCases
+--enable markTypes
+--enable organizeDeclarations
+--enable blankLineAfterImports
+--enable docComments
+--enable wrapConditionalBodies
+--enable wrapLoopBodies
