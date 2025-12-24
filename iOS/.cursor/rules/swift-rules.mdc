@@ -1,0 +1,254 @@
+---
+description: Swift/iOS development rules for Madduck projects
+globs: ["**/*.swift"]
+alwaysApply: true
+---
+
+# Swift Development Rules
+
+You are an expert iOS developer. Follow these rules strictly when writing or reviewing Swift code.
+
+## Architecture
+
+### UIKit Screens: VIPER Pattern
+```
+SceneName/
+├── SceneNameViewController.swift   # View
+├── SceneNameInteractor.swift       # Business Logic
+├── SceneNamePresenter.swift        # Presentation Logic
+├── SceneNameRouter.swift           # Navigation
+├── SceneNameWorker.swift           # Data Operations
+└── SceneNameModels.swift           # DTOs (Request/Response/ViewModel)
+```
+
+### SwiftUI Screens: MVVM Pattern
+```
+FeatureName/
+├── FeatureNameView.swift           # SwiftUI View
+├── FeatureNameViewModel.swift      # @MainActor ObservableObject
+├── FeatureNameModel.swift          # Models/DTOs
+└── FeatureNameService.swift        # Protocol & Implementation
+```
+
+### Swift Packages Structure
+```
+PackageName/
+├── Package.swift
+├── Sources/PackageName/
+│   ├── Models/
+│   ├── Services/
+│   ├── Views/
+│   ├── Extensions/
+│   └── Utilities/
+└── Tests/PackageNameTests/
+```
+
+## SOLID Principles (MANDATORY)
+
+1. **Single Responsibility**: One class/function = one job
+2. **Open/Closed**: Extend via protocols, don't modify existing code
+3. **Liskov Substitution**: Subclasses must be substitutable
+4. **Interface Segregation**: Small, focused protocols
+5. **Dependency Inversion**: Depend on protocols, not concrete types
+
+## Code Limits
+
+| Metric | Warning | Error |
+|--------|---------|-------|
+| Line Length | 120 | 150 |
+| File Length | 400 | 500 |
+| Type Body | 300 | 400 |
+| Function Body | 30 | 50 |
+| Cyclomatic Complexity | 5 | 10 |
+| Function Parameters | 4 | 6 |
+| Nesting Level | 3 | 4 |
+| Closure Body | 25 | 40 |
+
+## Forbidden Patterns
+
+- `as!` (force cast)
+- `try!` (force try)
+- `print()` statements - use proper logging
+- Hardcoded UI strings - use localization
+- Commented-out code
+- Magic numbers - use named constants
+- God classes
+- Circular dependencies between packages
+
+## Required Patterns
+
+- Protocol-based dependencies (dependency injection)
+- `// MARK: -` comments for file organization
+- `async/await` for asynchronous code
+- `@MainActor` for UI updates
+- Localized strings for all UI text
+
+## File Organization
+
+```swift
+import Foundation
+import UIKit
+
+// MARK: - Protocols
+
+protocol SomeProtocol {
+    // ...
+}
+
+// MARK: - Type Definition
+
+final class ClassName {
+
+    // MARK: - Constants
+
+    private enum Constants {
+        static let animationDuration: TimeInterval = 0.3
+    }
+
+    // MARK: - Properties
+
+    private let dependency: DependencyProtocol
+
+    // MARK: - UI Components
+
+    private lazy var button: UIButton = { ... }()
+
+    // MARK: - Initialization
+
+    init(dependency: DependencyProtocol) { ... }
+
+    // MARK: - Public Methods
+
+    func doSomething() { ... }
+
+    // MARK: - Private Methods
+
+    private func helperMethod() { ... }
+}
+
+// MARK: - Protocol Conformance
+
+extension ClassName: SomeProtocol { ... }
+
+// MARK: - Nested Types
+
+extension ClassName {
+    enum State { ... }
+}
+```
+
+## Naming Conventions
+
+| Type | Convention | Example |
+|------|------------|---------|
+| Classes/Structs | PascalCase | `UserProfileViewController` |
+| Protocols | PascalCase + suffix | `UserServiceProtocol` |
+| Functions | camelCase, verb-first | `fetchUser()` |
+| Variables | camelCase | `userName`, `isLoading` |
+| Enum cases | camelCase | `.loading`, `.error` |
+
+## Access Control
+
+Apply most restrictive level possible:
+- `public` - External APIs only
+- `internal` - Module scope (default)
+- `private` - Enclosing declaration only
+- `fileprivate` - Same file only
+
+## ViewModel Template (SwiftUI)
+
+```swift
+@MainActor
+final class FeatureNameViewModel: ObservableObject {
+    @Published private(set) var items: [ItemModel] = []
+    @Published private(set) var isLoading = false
+    @Published private(set) var errorMessage: String?
+
+    private let service: FeatureNameServiceProtocol
+
+    init(service: FeatureNameServiceProtocol = FeatureNameService()) {
+        self.service = service
+    }
+
+    func loadData() async {
+        isLoading = true
+        errorMessage = nil
+        do {
+            items = try await service.fetchItems()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+        isLoading = false
+    }
+}
+```
+
+## Service Protocol Template
+
+```swift
+protocol FeatureNameServiceProtocol: Sendable {
+    func fetchItems() async throws -> [ItemModel]
+}
+
+struct FeatureNameService: FeatureNameServiceProtocol {
+    private let networking: NetworkingProtocol
+
+    init(networking: NetworkingProtocol = NetworkingService.shared) {
+        self.networking = networking
+    }
+
+    func fetchItems() async throws -> [ItemModel] {
+        try await networking.fetch(endpoint: .items)
+    }
+}
+```
+
+## Testing Pattern
+
+```swift
+func test_methodName_condition_expectedResult() async {
+    // Arrange
+    let expected = ...
+    mockService.result = expected
+
+    // Act
+    await sut.loadData()
+
+    // Assert
+    XCTAssertEqual(sut.items, expected)
+}
+```
+
+## Package.swift Template
+
+```swift
+// swift-tools-version:6.0
+import PackageDescription
+
+let package = Package(
+    name: "PackageName",
+    platforms: [.iOS(.v15)],
+    products: [
+        .library(name: "PackageName", targets: ["PackageName"])
+    ],
+    targets: [
+        .target(name: "PackageName", swiftSettings: swiftSettings),
+        .testTarget(name: "PackageNameTests", dependencies: ["PackageName"])
+    ]
+)
+
+var swiftSettings: [SwiftSetting] { [
+    .enableUpcomingFeature("DisableOutwardActorInference"),
+    .enableExperimentalFeature("StrictConcurrency"),
+    .swiftLanguageMode(.v5)
+] }
+```
+
+## Dependency Layer Rules
+
+```
+Main App          → Can depend on everything below
+Feature Packages  → Can depend on Core only
+Core Packages     → Can depend on Foundation only
+Foundation        → No internal dependencies
+```
