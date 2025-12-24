@@ -1665,7 +1665,7 @@ custom_rules:
 
 ---
 
-## Testing Requirements
+## Testing Requirements (Optional, but preferred)
 
 ### Unit Testing Guidelines
 
@@ -1743,17 +1743,6 @@ final class FeatureViewModelTests: XCTestCase {
     }
 }
 ```
-
-### Test Coverage Requirements
-
-| Component | Minimum Coverage |
-|-----------|-----------------|
-| ViewModels | 80% |
-| Services | 90% |
-| Utilities | 95% |
-| Interactors | 85% |
-| Presenters | 75% |
-
 ---
 
 ## Code Review Checklist
@@ -1785,7 +1774,7 @@ Before submitting a PR, verify:
 - [ ] Proper MARK comments for sections
 - [ ] Imports sorted and organized
 
-### Testing
+### Testing (Optional, but preferred)
 - [ ] Unit tests for new functionality
 - [ ] Mock objects use protocols
 - [ ] Tests follow Arrange-Act-Assert pattern
@@ -1816,25 +1805,25 @@ Before submitting a PR, verify:
 ├────────────────────────────────────────────────────────────────┤
 │                         FORBIDDEN                              │
 ├────────────────────────────────────────────────────────────────┤
-│  ❌ force_cast (as!)                                            │
-│  ❌ force_try (try!)                                            │
-│  ❌ print() statements                                          │
-│  ❌ Hardcoded UI strings                                        │
-│  ❌ Commented-out code                                          │
-│  ❌ Magic numbers                                                │
-│  ❌ God classes (classes that do everything)                    │
-│  ❌ Circular dependencies between packages                      │
+│  ❌ force_cast (as!)                                           │
+│  ❌ force_try (try!)                                           │
+│  ❌ print() statements                                         │
+│  ❌ Hardcoded UI strings                                       │
+│  ❌ Commented-out code                                         │
+│  ❌ Magic numbers                                              │
+│  ❌ God classes (classes that do everything)                   │
+│  ❌ Circular dependencies between packages                     │
 ├────────────────────────────────────────────────────────────────┤
 │                         REQUIRED                               │
 ├────────────────────────────────────────────────────────────────┤
-│  ✅ Protocol-based dependencies                                 │
-│  ✅ MARK comments for file organization                         │
-│  ✅ Unit tests for business logic                               │
-│  ✅ Localized strings for UI                                    │
-│  ✅ async/await for asynchronous code                           │
-│  ✅ @MainActor for UI updates                                   │
-│  ✅ Dependency injection                                        │
-│  ✅ Single responsibility per class/function                    │
+│  ✅ Protocol-based dependencies                                │
+│  ✅ MARK comments for file organization                        │
+│  ✅ Unit tests for business logic  (Optional, but preferred)   │
+│  ✅ Localized strings for UI                                   │
+│  ✅ async/await for asynchronous code                          │
+│  ✅ @MainActor for UI updates                                  │
+│  ✅ Dependency injection                                       │
+│  ✅ Single responsibility per class/function                   │
 └────────────────────────────────────────────────────────────────┘
 ```
 
