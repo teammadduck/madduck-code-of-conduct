@@ -13,8 +13,8 @@ Code review guidelines and development standards for mobile projects.
 
 | Prefix | Description | Example |
 |--------|-------------|---------|
-| `maos-{app_name}-{platform}` | Madduck App Order Starter | `maos-fooddelivery-ios`, `maos-fooddelivery-flutter` |
-| `maov-{app_name}-{platform}` | Madduck App Order Verified | `maov-fooddelivery-ios`, `maov-fooddelivery-flutter` |
+| `maos-{app_name}-{platform}` | Madduck App Order Starter | `maos-fooddelivery-ios` |
+| `maov-{app_name}-{platform}` | Madduck App Order Verified | `maov-fooddelivery-flutter` |
 
 **Platform options:** `ios`, `flutter`
 
